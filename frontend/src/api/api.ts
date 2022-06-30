@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const SERVER_URL = window.location.hostname + ":5000";
+const SERVER_URL = window.location.hostname;
 
 export type DownloadStatus = {
   status: string;
