@@ -58,7 +58,7 @@ function Converter() {
   }, [status?.status]);
 
   const onDownload = () => {
-    const linkLocation = `http://${window.location.hostname}/downloads/${downloadId}/download`;
+    const linkLocation = `https://${window.location.hostname}/downloads/${downloadId}/download`;
     const link = document.createElement("a");
     link.href = linkLocation;
     link.click();

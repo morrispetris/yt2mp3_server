@@ -10,7 +10,7 @@ export type DownloadStatus = {
 
 export async function requestDownload(url: string): Promise<string> {
   const endpoint = "/download/request";
-  const res = await axios.post(`http://${SERVER_URL}${endpoint}`, { url });
+  const res = await axios.post(`https://${SERVER_URL}${endpoint}`, { url });
   return res.data.id;
 }
 
@@ -18,6 +18,6 @@ export async function getDownloadStatus(
   identifier: string
 ): Promise<DownloadStatus> {
   const endpoint = `/downloads/${identifier}/status`;
-  const res = await axios.get(`http://${SERVER_URL}${endpoint}`);
+  const res = await axios.get(`https://${SERVER_URL}${endpoint}`);
   return res.data;
 }
