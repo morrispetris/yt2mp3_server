@@ -58,4 +58,4 @@ def download_file(id: str) -> None:
 def serve(path):
     return app.send_static_file('index.html')
 
-app.run(debug=True)
+# app.run(debug=True)
