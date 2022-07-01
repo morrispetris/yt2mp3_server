@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from typing import Any, Callable, Dict
 from enum import Enum
-import youtube_dl
+import yt_dlp
 from threading import Thread
 
 class Logger(object):
@@ -32,7 +32,7 @@ def download(url: str, on_progress: Callable[[Dict[str, str]],None], on_error: C
     }
 
     try:
-        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download([url])
     except Exception as e:
         on_error(e)
