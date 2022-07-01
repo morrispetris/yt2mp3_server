@@ -30,7 +30,7 @@ function LoadingView() {
 
   React.useEffect(() => {
     if (status?.status === "finished") {
-      // window.location.href = "/view/downloads";
+      window.location.href = "/view/downloads";
     }
   }, [status]);
 
