@@ -3,6 +3,9 @@ from typing import Any, Callable, Dict
 from enum import Enum
 import yt_dlp
 from threading import Thread
+import pathlib
+import os
+import json
 
 class Logger(object):
     def debug(self, msg):
@@ -20,8 +23,10 @@ class Status(Enum):
     ERROR = 'error'
 
 def download(url: str, on_progress: Callable[[Dict[str, str]],None], on_error: Callable) -> None:
+    d = os.getcwd()
     ydl_opts = {
         'format': 'bestaudio/best',
+        'outtmpl': d + '/uploads/%(title)s.%(ext)s',
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
             'preferredcodec': 'mp3',
@@ -42,6 +47,10 @@ class Downloader:
     def __init__(self, url: str) -> None:
         self.url = url
         self.status = None
+        self.info = ''
+        self.is_playlist = False
+        self.playlist_count = 0
+        self.playlist_index = 0
 
     def start(self) -> None:
         self.thread = Thread(target=download, args=(self.url, self.on_progress, self.on_error))
@@ -61,15 +70,36 @@ class Downloader:
             return {'status': self.status}
         return {
             'status': self.status,
-            'eta': self.eta,
-            'percent_progress': self.percent_progress,
+            'info': self.info,
+            'playlist_index': self.playlist_index,
+            'playlist_count': self.playlist_count,
+            'is_playlist': self.is_playlist,
         }
 
     def on_progress(self, progress: Dict[str,str]) -> None:
-        print(progress)
+        print('###################')
+        # self.eta = progress.get('_eta_str')
+        # self.percent_progress = progress.get( '_percent_str' )
+        self.info = progress.get('_default_template')
+        # with open('test.json', 'w') as fp:
+        #     json.dump(progress, fp)
+        #     raise RuntimeError('boooom')
+
+        info_dict: Dict[str,str] = progress.get('info_dict')
+        self.is_playlist = info_dict.get('playlist') is not None
+        if self.is_playlist:
+            self.playlist_count = info_dict.get('playlist_count')
+            self.playlist_index = info_dict.get('playlist_index')
+            finished =  progress.get('status') == Status.FINISHED.value
+            is_last = self.playlist_index == self.playlist_index
+            if finished and is_last:
+                print('****** FINISHED *******')
+                self.status = Status.FINISHED.value
+            elif not finished:
+                self.status = progress.get('status')
+            return
+        # Single files
         self.status = progress.get('status')
-        self.eta = progress.get('_eta_str')
-        self.percent_progress = progress.get( '_percent_str' )
         if progress['status'] == Status.FINISHED.value:
             print('****** FINISHED *******')
             self.filename = progress['filename']
