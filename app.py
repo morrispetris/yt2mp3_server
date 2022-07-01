@@ -2,7 +2,8 @@
 from typing import Dict, List
 
 from flask import Flask, request, jsonify, send_file, after_this_request, send_from_directory
-from flask_cors import CORS  # comment this on deployment
+# COMMENT THIS
+# from flask_cors import CORS  # comment this on deployment
 import os
 import pathlib
 
@@ -10,7 +11,8 @@ import backend.youtube_dl_wrapper as youtube_dl
 import uuid
 
 app = Flask(__name__, static_url_path='/', static_folder='frontend/build')
-CORS(app)  # comment this on deployment
+# COMMENT THIS
+# CORS(app)  # comment this on deployment
 
 downloads: Dict[str, youtube_dl.Downloader] = {}
 
@@ -79,4 +81,5 @@ def download_file(id: str) -> None:
 def serve(path):
     return app.send_static_file('index.html')
 
-app.run(debug=True)
+# COMMENT THIS
+# app.run(debug=True)
