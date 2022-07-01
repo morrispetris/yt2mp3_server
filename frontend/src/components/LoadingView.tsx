@@ -3,7 +3,6 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import * as youtubeDlApi from "../api/api";
 import loadCat from "../assets/loadcat.gif";
 import { useParams } from "react-router-dom";
-import Button from "@material-ui/core/Button";
 
 function LoadingView() {
   const params = useParams();
