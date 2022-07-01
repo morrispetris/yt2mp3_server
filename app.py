@@ -81,5 +81,9 @@ def download_file(id: str) -> None:
 def serve(path):
     return app.send_static_file('index.html')
 
+@app.errorhandler(404)
+def not_found(e):
+    return app.send_static_file('index.html')
+
 # COMMENT THIS
 # app.run(debug=True)
