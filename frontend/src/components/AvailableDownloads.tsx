@@ -31,9 +31,7 @@ export default function AvailableDownloads(props: Props) {
   };
 
   const onDownload = (fileName: string) => () => {
-    window.open(
-      `http://${window.location.hostname}:5000/downloads/${fileName}`
-    );
+    window.open(`http://${window.location.hostname}/downloads/${fileName}`);
   };
 
   const onDelete = (fileName: string) => async () => {
