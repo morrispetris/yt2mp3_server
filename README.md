@@ -21,7 +21,9 @@ Restricted to fair use. Always respect terms and conditions of video platforms. 
 Be nice with each other. Etc..
 
 # NTH/ROADMAP
-- [] Download playlist
+- [] Download playlist:
+- [] playlist progress
+- [] show progress
 
 # API
 
