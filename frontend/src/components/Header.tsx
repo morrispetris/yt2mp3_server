@@ -1,16 +1,13 @@
 import React from "react";
 
-import cockatriceBanner from "../assets/cockatrice_banner_white.png";
-import tappedoutBanner from "../assets/tappedout_banner.png";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 function Header() {
   return (
     <header className="Header">
-      <img
-        src={tappedoutBanner}
-        className="logo tappedoutLogo"
-        alt="tappedout_logo"
-      />
+      <Link to="/">Home</Link>
+      <Link to="/view/in_progress">In progress</Link>
+      <Link to="/view/downloads">Downloads</Link>
     </header>
   );
 }
