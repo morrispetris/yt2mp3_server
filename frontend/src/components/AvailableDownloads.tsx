@@ -35,7 +35,7 @@ export default function AvailableDownloads(props: Props) {
     // window.open(downloadUrl);
     const link = document.createElement("a");
     link.href = downloadUrl;
-    link.download = "";
+    link.download = fileName;
     link.click();
   };
 
