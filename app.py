@@ -89,4 +89,4 @@ def not_found(e):
     return app.send_static_file('index.html')
 
 # COMMENT THIS
-app.run(debug=True)
+# app.run(debug=True)
