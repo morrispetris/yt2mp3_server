@@ -32,11 +32,11 @@ export default function AvailableDownloads(props: Props) {
 
   const onDownload = (fileName: string) => () => {
     const downloadUrl = getDownloadUrl(fileName);
-    // window.open(downloadUrl);
-    const link = document.createElement("a");
-    link.href = downloadUrl;
-    link.download = fileName;
-    link.click();
+    window.open(downloadUrl);
+    // const link = document.createElement("a");
+    // link.href = downloadUrl;
+    // link.download = fileName;
+    // link.click();
   };
 
   const onDelete = (fileName: string) => async () => {
