@@ -1,5 +1,5 @@
 import React from "react";
-import { listDownloads, deleteDownload } from "../api/api";
+import { listDownloads, deleteDownload, getDownloadUrl } from "../api/api";
 
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -31,7 +31,8 @@ export default function AvailableDownloads(props: Props) {
   };
 
   const onDownload = (fileName: string) => () => {
-    window.open(`http://${window.location.hostname}/downloads/${fileName}`);
+    const downloadUrl = getDownloadUrl(fileName);
+    window.open(downloadUrl);
   };
 
   const onDelete = (fileName: string) => async () => {

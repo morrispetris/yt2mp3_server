@@ -11,6 +11,10 @@ export type DownloadStatus = {
   playlist_count: number;
 };
 
+export function getDownloadUrl(fileName: string) {
+  return `https://${SERVER_URL}/downloads/${fileName}`;
+}
+
 export async function requestDownload(url: string): Promise<string> {
   const endpoint = "/download/request";
   const res = await axios.post(`https://${SERVER_URL}${endpoint}`, { url });
