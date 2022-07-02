@@ -53,9 +53,7 @@ export default function AvailableDownloads(props: Props) {
   }, []);
 
   if (availableDownloads.length === 0) {
-    return (
-      <div className="DownloadsWrapper">No downloads available yet. 🤷</div>
-    );
+    return <div className="NoDownloads">No downloads available yet. 🤷</div>;
   }
 
   return (
