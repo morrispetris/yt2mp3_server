@@ -40,6 +40,9 @@ def get_download_status(id: str):
 @app.get('/downloads')
 def list_downloads():
     downloads = [f for f in os.listdir('uploads') if os.path.isfile(os.path.join('uploads', f))]
+    # remove default file, there for git to keep the dir as Heroku wont let us.
+    if '.ignore' in downloads:
+        downloads.remove('.ignore')
     return jsonify(downloads)
 
 @app.route('/downloads/<filename>')
@@ -86,4 +89,4 @@ def not_found(e):
     return app.send_static_file('index.html')
 
 # COMMENT THIS
-# app.run(debug=True)
+app.run(debug=True)

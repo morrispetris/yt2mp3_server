@@ -25,15 +25,15 @@ function LoadingView() {
 
   const info = status?.is_playlist
     ? `${status.info}  ${status.playlist_index}/${status.playlist_count}`
-    : `${status?.info} `;
+    : status?.info
+    ? `${status?.info} `
+    : "Loading";
 
   React.useEffect(() => {
     if (status?.status === "finished") {
       window.location.href = "/view/downloads";
     }
   }, [status]);
-
-  console.log(status);
 
   return (
     <>

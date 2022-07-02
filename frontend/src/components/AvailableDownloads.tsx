@@ -52,6 +52,12 @@ export default function AvailableDownloads(props: Props) {
     listDownloads().then((downloads) => setAvailableDownloads(downloads));
   }, []);
 
+  if (availableDownloads.length === 0) {
+    return (
+      <div className="DownloadsWrapper">No downloads available yet. 🤷</div>
+    );
+  }
+
   return (
     <div className="DownloadsWrapper">
       <List sx={{ width: "100%", maxWidth: 360, bgcolor: "#c1ffebbf" }}>
