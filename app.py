@@ -1,18 +1,17 @@
 #!/usr/bin/python3
-from typing import Dict, List
-
 from flask import Flask, request, jsonify, send_file, after_this_request, send_from_directory
-# COMMENT THIS
-# from flask_cors import CORS  # comment this on deployment
 import os
 import pathlib
 
 import backend.youtube_dl_wrapper as youtube_dl
 import uuid
 
+IS_DEBUG = os.environ.get('IS_DEBUG') is not None
+
 app = Flask(__name__, static_url_path='/', static_folder='frontend/build')
-# COMMENT THIS
-# CORS(app)  # comment this on deployment
+if IS_DEBUG:
+    from flask_cors import CORS
+    CORS(app)
 
 downloads: Dict[str, youtube_dl.Downloader] = {}
 
@@ -89,4 +88,5 @@ def not_found(e):
     return app.send_static_file('index.html')
 
 # COMMENT THIS
-# app.run(debug=True)
+if IS_DEBUG:
+    app.run(debug=True)
