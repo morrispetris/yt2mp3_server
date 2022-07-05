@@ -65,17 +65,12 @@ export default function AvailableDownloads(props: Props) {
             secondaryAction={
               <>
                 <IconButton
-                  edge="end"
                   aria-label="download"
                   onClick={onDownload(fileName)}
                 >
                   <DownloadIcon />
                 </IconButton>
-                <IconButton
-                  edge="end"
-                  aria-label="delete"
-                  onClick={onDelete(fileName)}
-                >
+                <IconButton aria-label="delete" onClick={onDelete(fileName)}>
                   <DeleteIcon />
                 </IconButton>
               </>
