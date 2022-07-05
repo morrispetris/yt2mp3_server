@@ -6,7 +6,7 @@ Don't you love having to use <INSERT ONLINE VIDEOS PLATFORM>TO_MP3 hpublic websi
 If so here's the solution: get your very own youtube_to_mp3 website!
 
 Create a yt2mp3 converter self hostable website.
-Backend relying on [youtube-dl](https://github.com/ytdl-org/youtube-dl), this is essentially a frontend for this tool.
+Backend relying on [yt-dlp](https://github.com/yt-dlp/yt-dlp), this is essentially a frontend for this tool.
 
 # Requirements
 - [`docker`](https://docs.docker.com/get-docker/)
