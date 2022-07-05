@@ -8,15 +8,20 @@ import Header from "./components/Header";
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Header />
-        <Routes>
-          <Route path="" element={<Converter />} />
-          <Route path="/view/downloads" element={<AvailableDownloads />} />
-          <Route path="/view/downloads/:downloadId" element={<LoadingView />} />
-        </Routes>
-      </Router>
+    <div className="AppWrapper">
+      <div className="App">
+        <Router>
+          <Header />
+          <Routes>
+            <Route path="" element={<Converter />} />
+            <Route path="/view/downloads" element={<AvailableDownloads />} />
+            <Route
+              path="/view/downloads/:downloadId"
+              element={<LoadingView />}
+            />
+          </Routes>
+        </Router>
+      </div>
     </div>
   );
 }

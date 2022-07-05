@@ -1,9 +1,17 @@
-.App {
+.AppWrapper {
   text-align: center;
   background: url('assets/background.jpg');
   background-repeat: repeat;
   background-size: cover;
   min-height: 100vh;
+
+}
+
+@media (min-width: 640px){
+  .App {
+    width: 500px;
+    margin: auto;
+  }
 }
 
 .Converter {
