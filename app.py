@@ -22,7 +22,7 @@ def download():
     content = request.json
     print(content)
     identifier = str(uuid.uuid4())
-    downloader = youtube_dl.Downloader(content['url'])
+    downloader = youtube_dl.Downloader(content['url'], content['format'])
     downloader.start()
     downloads[identifier] = downloader
     return jsonify({'id': identifier})

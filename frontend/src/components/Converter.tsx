@@ -17,8 +17,8 @@ const theme = createMuiTheme({
 });
 
 function Converter() {
-  async function onConvert(url: string) {
-    const downloadId = await youtubeDlApi.requestDownload(url);
+  async function onConvert(url: string, format: youtubeDlApi.Format) {
+    const downloadId = await youtubeDlApi.requestDownload(url, format);
     window.location.href = `/view/downloads/${downloadId}`;
   }
 

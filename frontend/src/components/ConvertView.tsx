@@ -1,10 +1,14 @@
 import React from "react";
+import * as youtubeDlApi from "../api/api";
+
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 
 import ConvertButton from "./ConvertButton";
 import UrlInput from "./UrlInput";
 
 type Props = {
-  onConvert: (url: string) => void;
+  onConvert: (url: string, format: youtubeDlApi.Format) => void;
 };
 
 function isValidHttpUrl(maybeUrl: string): boolean {
@@ -19,9 +23,11 @@ function isValidHttpUrl(maybeUrl: string): boolean {
 
 function ConverterView({ onConvert }: Props) {
   const [url, setUrl] = React.useState("");
+  const [asVideo, setAsVideo] = React.useState(false);
 
   const onClick = () => {
-    onConvert(url);
+    const format = asVideo ? youtubeDlApi.Format.mp4 : youtubeDlApi.Format.mp3;
+    onConvert(url, format);
   };
 
   const error = React.useMemo(
@@ -29,10 +35,18 @@ function ConverterView({ onConvert }: Props) {
     [url]
   );
 
+  const onToggleAsVideo = () => {
+    setAsVideo((currentState) => !currentState);
+  };
+
   return (
     <div className="InputView">
       <p className="InsertText">Please insert url</p>
       <UrlInput error={error} setUrl={setUrl} onEnter={onClick} />
+      <FormControlLabel
+        control={<Checkbox checked={asVideo} onChange={onToggleAsVideo} />}
+        label="As video"
+      />
       <ConvertButton error={error} onClick={onClick} />
     </div>
   );

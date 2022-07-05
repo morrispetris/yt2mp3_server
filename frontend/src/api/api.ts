@@ -2,6 +2,10 @@ import axios from "axios";
 
 const SERVER_PORT = 80;
 const SERVER_URL = `${window.location.protocol}//${window.location.hostname}`;
+export enum Format {
+  mp3 = "mp3",
+  mp4 = "mp4",
+}
 
 export type DownloadStatus = {
   status: string;
@@ -15,9 +19,12 @@ export function getDownloadUrl(fileName: string) {
   return `${SERVER_URL}/downloads/${fileName}`;
 }
 
-export async function requestDownload(url: string): Promise<string> {
+export async function requestDownload(
+  url: string,
+  format: Format
+): Promise<string> {
   const endpoint = "/download/request";
-  const res = await axios.post(`${SERVER_URL}${endpoint}`, { url });
+  const res = await axios.post(`${SERVER_URL}${endpoint}`, { url, format });
   return res.data.id;
 }
 
