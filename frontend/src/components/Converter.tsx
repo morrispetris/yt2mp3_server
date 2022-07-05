@@ -2,7 +2,7 @@ import React from "react";
 import * as youtubeDlApi from "../api/api";
 
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import { blue } from "@material-ui/core/colors";
+import { blue, red } from "@material-ui/core/colors";
 import ConvertView from "./ConvertView";
 
 const theme = createMuiTheme({
@@ -10,8 +10,13 @@ const theme = createMuiTheme({
     primary: {
       main: blue[500],
     },
-    secondary: {
-      main: blue[800],
+    text: {
+      secondary: "rgba(255,255,255,0.82)",
+    },
+  },
+  typography: {
+    button: {
+      fontWeight: 600,
     },
   },
 });
