@@ -22,19 +22,25 @@ class Status(Enum):
     FINISHED = 'finished'
     ERROR = 'error'
 
-def download(url: str, on_progress: Callable[[Dict[str, str]],None], on_error: Callable) -> None:
+class Format(Enum):
+    MP3 = 'mp3'
+    MP4 = 'mp4'
+
+def download(url: str, format: str, on_progress: Callable[[Dict[str, str]],None], on_error: Callable) -> None:
     d = os.getcwd()
     ydl_opts = {
-        'format': 'bestaudio/best',
         'outtmpl': d + '/uploads/%(title)s.%(ext)s',
-        'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'mp3',
-            'preferredquality': '192',
-        }],
         'logger': Logger(),
         'progress_hooks': [on_progress],
     }
+
+    if format == Format.MP3.value:
+        ydl_opts['postprocessors'] = [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',
+        }]
+        ydl_opts['format'] = 'bestaudio/best'
 
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -44,8 +50,9 @@ def download(url: str, on_progress: Callable[[Dict[str, str]],None], on_error: C
 
 
 class Downloader:
-    def __init__(self, url: str) -> None:
+    def __init__(self, url: str, format: str) -> None:
         self.url = url
+        self.format = format
         self.status = None
         self.info = ''
         self.is_playlist = False
@@ -53,7 +60,7 @@ class Downloader:
         self.playlist_index = 0
 
     def start(self) -> None:
-        self.thread = Thread(target=download, args=(self.url, self.on_progress, self.on_error))
+        self.thread = Thread(target=download, args=(self.url, self.format, self.on_progress, self.on_error))
         self.thread.start()
 
     def on_error(self, error):
@@ -88,6 +95,7 @@ class Downloader:
         info_dict: Dict[str,str] = progress.get('info_dict')
         self.is_playlist = info_dict.get('playlist') is not None
         if self.is_playlist:
+            print('its a playlist')
             self.playlist_count = info_dict.get('playlist_count')
             self.playlist_index = info_dict.get('playlist_index')
             finished =  progress.get('status') == Status.FINISHED.value
@@ -99,6 +107,7 @@ class Downloader:
                 self.status = progress.get('status')
             return
         # Single files
+        print('its not a playlist')
         self.status = progress.get('status')
         if progress['status'] == Status.FINISHED.value:
             print('****** FINISHED *******')
