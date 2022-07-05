@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 from flask import Flask, request, jsonify, send_file, after_this_request, send_from_directory
+from typing import Dict
 import os
 import pathlib
 
