@@ -1,6 +1,8 @@
 .AppWrapper {
   text-align: center;
+  /*
   background: url('assets/background.jpg');
+  */
   background-repeat: repeat;
   background-size: cover;
   min-height: 100vh;
