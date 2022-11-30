@@ -4,7 +4,9 @@ const SERVER_PORT = 80;
 const SERVER_URL = `${window.location.protocol}//${window.location.hostname}`;
 export enum Format {
   mp3 = "mp3",
+  /*
   mp4 = "mp4",
+  */
 }
 
 export type DownloadStatus = {
