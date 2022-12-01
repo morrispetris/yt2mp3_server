@@ -9,6 +9,9 @@ import json
 import subprocess
 
 class Logger(object):
+    def info(self, msg):
+        print(msg)
+        
     def debug(self, msg):
         print(msg)
 
