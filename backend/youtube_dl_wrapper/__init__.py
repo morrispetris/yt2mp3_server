@@ -52,6 +52,7 @@ def download(url: str, format: str, on_progress: Callable[[Dict[str, str]],None]
         ydl_opts['keepvideo'] = False
         ydl_opts['quiet'] = False
         ydl_opts['prefer_ffmpeg'] = True
+        ydl_opts['verbose'] = True
         
                
     try:
