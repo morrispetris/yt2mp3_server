@@ -29,8 +29,8 @@ class Format(Enum):
 def download(url: str, format: str, on_progress: Callable[[Dict[str, str]],None], on_error: Callable) -> None:
     d = os.getcwd()
     ydl_opts = {
-        #'outtmpl': d + '/uploads/%(title)s.%(ext)s',
-        'outtmpl': d + '/uploads/%(title)s.mp3',
+        'outtmpl': d + '/uploads/%(title)s.%(ext)s',
+        #'outtmpl': d + '/uploads/%(title)s.mp3',
         'logger': Logger(),
         'progress_hooks': [on_progress],
     }
@@ -100,6 +100,7 @@ class Downloader:
         #     raise RuntimeError('boooom')
 
         info_dict: Dict[str,str] = progress.get('info_dict')
+        print('info_dict: ' + progress.get('info_dict'))
         self.is_playlist = info_dict.get('playlist') is not None
         if self.is_playlist:
             print('its a playlist')
