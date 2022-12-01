@@ -105,7 +105,7 @@ class Downloader:
         #     raise RuntimeError('boooom')
 
         info_dict: Dict[str,str] = progress.get('info_dict')
-        print(progress.get('info_dict'))
+        #print(progress.get('info_dict'))
         self.is_playlist = info_dict.get('playlist') is not None
         if self.is_playlist:
             print('its a playlist')
