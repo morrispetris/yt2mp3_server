@@ -68,9 +68,6 @@ class Downloader:
         self.playlist_index = 0
 
     def start(self) -> None:
-        process = subprocess.Popen(['ffmpeg', '--version'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        out, err = process.communicate()
-        print(out)
 
         self.thread = Thread(target=download, args=(self.url, self.format, self.on_progress, self.on_error))
         self.thread.start()
@@ -125,5 +122,9 @@ class Downloader:
         if progress['status'] == Status.FINISHED.value:
             print('****** FINISHED *******')
             self.filename = progress['filename']
+            
+            process = subprocess.Popen(['ffmpeg', '--version'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            out, err = process.communicate()
+            print(out)
     def __repr__(self) -> str:
         return str(self.__dict__)
