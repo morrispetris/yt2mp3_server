@@ -6,6 +6,7 @@ from threading import Thread
 import pathlib
 import os
 import json
+import subprocess
 
 class Logger(object):
     def debug(self, msg):
@@ -67,6 +68,10 @@ class Downloader:
         self.playlist_index = 0
 
     def start(self) -> None:
+        process = subprocess.Popen(['ffmpeg', '--version'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        out, err = process.communicate()
+        print(out)
+
         self.thread = Thread(target=download, args=(self.url, self.format, self.on_progress, self.on_error))
         self.thread.start()
 
