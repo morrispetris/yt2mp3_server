@@ -42,7 +42,8 @@ def download(url: str, format: str, on_progress: Callable[[Dict[str, str]],None]
                 'preferredcodec': 'mp3',
                 'preferredquality': '192',
         }]
-        ydl_opts['format'] = 'bestaudio/best'
+        #ydl_opts['format'] = 'bestaudio/best'
+        ydl_opts['format'] = 'mp3/bestaudio/best'
         #ydl_opts['format'] = 'mp3/best'
         #ydl_opts['format'] = 'worstaudio'
         ydl_opts['keepvideo'] = False
