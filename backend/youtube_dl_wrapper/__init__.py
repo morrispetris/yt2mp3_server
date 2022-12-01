@@ -42,7 +42,7 @@ def download(url: str, format: str, on_progress: Callable[[Dict[str, str]],None]
                 #'preferredquality': '192',
         }]
         #ydl_opts['format'] = 'bestaudio/best'
-        ydl_opts['format'] = 'best'
+        ydl_opts['format'] = 'worstaudio'
 
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
