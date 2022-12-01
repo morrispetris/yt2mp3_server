@@ -26,7 +26,10 @@ function ConverterView({ onConvert }: Props) {
   const [asVideo, setAsVideo] = React.useState(false);
 
   const onClick = () => {
+    /*
     const format = asVideo ? youtubeDlApi.Format.mp4 : youtubeDlApi.Format.mp3;
+    */
+    const format = youtubeDlApi.Format.mp3;
     onConvert(url, format);
   };
 
