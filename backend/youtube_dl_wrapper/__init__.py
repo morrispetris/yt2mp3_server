@@ -44,6 +44,7 @@ def download(url: str, format: str, on_progress: Callable[[Dict[str, str]],None]
         #ydl_opts['format'] = 'worstaudio'
         ydl_opts['keepvideo'] = False
         ydl_opts['quiet'] = False
+        ydl_opts['prefer_ffmpeg'] = True
         ydl_opts['restrictfilenames'] = True
                
     try:
