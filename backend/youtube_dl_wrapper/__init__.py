@@ -29,7 +29,8 @@ class Format(Enum):
 def download(url: str, format: str, on_progress: Callable[[Dict[str, str]],None], on_error: Callable) -> None:
     d = os.getcwd()
     ydl_opts = {
-        'outtmpl': d + '/uploads/%(title)s.%(ext)s',
+        #'outtmpl': d + '/uploads/%(title)s.%(ext)s',
+        'outtmpl': d + '/uploads/%(title)s.mp3',
         'logger': Logger(),
         'progress_hooks': [on_progress],
     }
@@ -40,8 +41,8 @@ def download(url: str, format: str, on_progress: Callable[[Dict[str, str]],None]
                 'preferredcodec': 'mp3',
                 'preferredquality': '192',
         }]
-        #ydl_opts['format'] = 'bestaudio/best'
-        ydl_opts['format'] = 'mp3/best'
+        ydl_opts['format'] = 'bestaudio/best'
+        #ydl_opts['format'] = 'mp3/best'
         #ydl_opts['format'] = 'worstaudio'
         ydl_opts['keepvideo'] = False
         ydl_opts['quiet'] = False
