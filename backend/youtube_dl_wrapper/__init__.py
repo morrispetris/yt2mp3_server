@@ -24,7 +24,7 @@ class Status(Enum):
 
 class Format(Enum):
     MP3 = 'mp3'
-    MP4 = 'mp4'
+    #MP4 = 'mp4'
 
 def download(url: str, format: str, on_progress: Callable[[Dict[str, str]],None], on_error: Callable) -> None:
     d = os.getcwd()
