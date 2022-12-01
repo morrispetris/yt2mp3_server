@@ -103,6 +103,11 @@ class Downloader:
 
         info_dict: Dict[str,str] = progress.get('info_dict')
         #print(progress.get('info_dict'))
+        
+        process = subprocess.Popen(['ffmpeg', '--version'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        out, err = process.communicate()
+        print(out)
+        
         self.is_playlist = info_dict.get('playlist') is not None
         if self.is_playlist:
             print('its a playlist')
@@ -122,9 +127,6 @@ class Downloader:
         if progress['status'] == Status.FINISHED.value:
             print('****** FINISHED *******')
             self.filename = progress['filename']
-            
-            process = subprocess.Popen(['ffmpeg', '--version'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            out, err = process.communicate()
-            print(out)
+                        
     def __repr__(self) -> str:
         return str(self.__dict__)
