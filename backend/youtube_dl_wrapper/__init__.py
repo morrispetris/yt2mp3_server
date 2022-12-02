@@ -9,18 +9,19 @@ import json
 import subprocess
 import time
 
+
 class Logger(object):
     def info(self, msg):
-        print(msg)
+        print("info: " +  msg)
         
     def debug(self, msg):
-        print(msg)
+        print("debug: " + msg)
 
     def warning(self, msg):
-        print(msg)
+        print("warning: " + msg)
 
     def error(self, msg):
-        print(msg)
+        print("error: " + msg)
 
 class Status(Enum):
     DOWNLOADING = 'downloading'
@@ -76,6 +77,7 @@ class Downloader:
         self.is_playlist = False
         self.playlist_count = 0
         self.playlist_index = 0
+        self.filename = ''
 
     def start(self) -> None:
 
@@ -94,12 +96,23 @@ class Downloader:
             return {'status': 'downloading'}
         if self.status == Status.ERROR.value:
             return {'status': self.status}
+        if self.status == Status.CONVERTING.value:
+          c1 = os.path.exists(self.filename)
+          c2 = os.path.exists(self.filename+".part")
+          if c1 or c2:
+            self.status = Status.CONVERTING.value
+          else:
+            self.status = Status.FINISHED.value
+            print("c1: " + str(c1))
+            print("c2: " + str(c2))
+            return {'status': 'finished'}
         return {
             'status': self.status,
             'info': self.info,
             'playlist_index': self.playlist_index,
             'playlist_count': self.playlist_count,
             'is_playlist': self.is_playlist,
+            'filename': self.filename,
         }
 
     def on_progress(self, progress: Dict[str,str]) -> None:
@@ -128,18 +141,31 @@ class Downloader:
             return
         # Single files
         print('its not a playlist')
-        time.sleep(2000)
-        print(progress)       
-            
-        self.status = progress.get('status')
-        
-        #if progress.get('status') == Status.FINISHED.value:
-        #    self.status = Status.DOWNLOADED.value
-        
-        if progress['status'] == Status.FINISHED.value:
-            print('****** FINISHED *******')
-            self.filename = progress['filename']
-            
-                        
+        #time.sleep(500/1000)
+        #print(progress
+        #self.status = progress.get('status')
+
+        self.filename = progress.get('filename')
+
+        if progress.get('status') == Status.FINISHED.value:
+           self.status = Status.CONVERTING.value
+           print('****** DOWNLOADED and CONVERTING *******')
+
+        #c1 = os.path.exists(progress.get('filename'))
+        #c2 = os.path.exists(progress.get('filename')+".part")
+
+        #if c1 or c2:
+        #   self.status = Status.CONVERTING.value
+        #   time.sleep(200/1000)
+        #else:
+        #   self.status = Status.FINISHED.value
+        #   print("c1: " + str(c1))
+        #   print("c2: " + str(c2))
+
+        #if progress['status'] == Status.FINISHED.value:
+        #    print('****** FINISHED *******')
+        #    self.filename = progress['filename']
+        #    print(progress)
+
     def __repr__(self) -> str:
         return str(self.__dict__)
