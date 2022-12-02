@@ -24,7 +24,9 @@ class Logger(object):
 
 class Status(Enum):
     DOWNLOADING = 'downloading'
+    DOWNLOADED = 'downloaded'
     FINISHED = 'finished'
+    CONVERTING = 'converting'    
     ERROR = 'error'
 
 class Format(Enum):
@@ -110,7 +112,6 @@ class Downloader:
         #     raise RuntimeError('boooom')
 
         info_dict: Dict[str,str] = progress.get('info_dict')
-        #print(progress.get('info_dict'))
 
         self.is_playlist = info_dict.get('playlist') is not None
         if self.is_playlist:
@@ -127,8 +128,14 @@ class Downloader:
             return
         # Single files
         print('its not a playlist')
-        time.sleep(500/1000)
+        time.sleep(2000)
+        print(progress)       
+            
         self.status = progress.get('status')
+        
+        #if progress.get('status') == Status.FINISHED.value:
+        #    self.status = Status.DOWNLOADED.value
+        
         if progress['status'] == Status.FINISHED.value:
             print('****** FINISHED *******')
             self.filename = progress['filename']
