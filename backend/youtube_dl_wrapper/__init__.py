@@ -127,7 +127,7 @@ class Downloader:
             return
         # Single files
         print('its not a playlist')
-        time.sleep(100/1000)
+        time.sleep(500/1000)
         self.status = progress.get('status')
         if progress['status'] == Status.FINISHED.value:
             print('****** FINISHED *******')
