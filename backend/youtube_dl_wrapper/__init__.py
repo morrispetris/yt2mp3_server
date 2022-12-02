@@ -7,6 +7,7 @@ import pathlib
 import os
 import json
 import subprocess
+import time
 
 class Logger(object):
     def info(self, msg):
@@ -130,6 +131,8 @@ class Downloader:
         if progress['status'] == Status.FINISHED.value:
             print('****** FINISHED *******')
             self.filename = progress['filename']
+            time.sleep(10)
+            progress.get('info_dict')
                         
     def __repr__(self) -> str:
         return str(self.__dict__)
