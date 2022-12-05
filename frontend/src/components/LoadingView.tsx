@@ -29,7 +29,7 @@ function LoadingView() {
     ? `${status?.info} `
     : "Loading";
 
-  const size = `${status?.size}`
+  const size = status?.size ? `${status?.size} ` : "0"
 
   React.useEffect(() => {
     if (status?.status === "finished") {

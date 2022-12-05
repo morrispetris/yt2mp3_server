@@ -94,8 +94,6 @@ class Downloader:
 
     def get_status(self) -> Dict[str,str]:
 
-        self.size = os.path.getsize(self.filename.replace(".webm", ".mp3"))/1024*1024
-
         if self.status is None:
             return {'status': 'downloading'}
         if self.status == Status.ERROR.value:
@@ -105,6 +103,7 @@ class Downloader:
           c2 = os.path.exists(self.filename+".part")
           if c1 or c2:
             self.status = Status.CONVERTING.value
+            self.size = os.path.getsize(self.filename.replace(".webm", ".mp3"))/(1024*1024)
           else:
             self.status = Status.FINISHED.value
             print("c1: " + str(c1))
