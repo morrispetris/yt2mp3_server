@@ -78,6 +78,7 @@ class Downloader:
         self.playlist_count = 0
         self.playlist_index = 0
         self.filename = ''
+        self.size = ''
 
     def start(self) -> None:
 
@@ -92,6 +93,9 @@ class Downloader:
         self.status = Status.ERROR.value
 
     def get_status(self) -> Dict[str,str]:
+
+        self.size = os.path.getsize(self.filename.replace(".webm", ".mp3"))/1024*1024
+
         if self.status is None:
             return {'status': 'downloading'}
         if self.status == Status.ERROR.value:
@@ -113,6 +117,7 @@ class Downloader:
             'playlist_count': self.playlist_count,
             'is_playlist': self.is_playlist,
             'filename': self.filename,
+            'size': self.size,
         }
 
     def on_progress(self, progress: Dict[str,str]) -> None:

@@ -15,6 +15,8 @@ export type DownloadStatus = {
   is_playlist: boolean;
   playlist_index: number;
   playlist_count: number;
+  filename: string;
+  size: string;
 };
 
 export function getDownloadUrl(fileName: string) {

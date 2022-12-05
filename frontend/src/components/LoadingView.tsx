@@ -29,6 +29,8 @@ function LoadingView() {
     ? `${status?.info} `
     : "Loading";
 
+  const size = `${status?.size}`
+
   React.useEffect(() => {
     if (status?.status === "finished") {
       window.location.href = "/view/downloads";
@@ -39,7 +41,7 @@ function LoadingView() {
     <>
       <div className="LoadingWrapper">
         <img src={loadCat} alt="loading_cat" className="LoadingCat" />
-        <div className="LoadingText">{info || "Loading"}</div>
+        <div className="LoadingText">{info || "Loading"}, converting {size || "0"}MB</div>
       </div>
       <LinearProgress style={{ margin: "10%", width: "80%" }} />
     </>
