@@ -47,7 +47,8 @@ def download(url: str, format: str, on_progress: Callable[[Dict[str, str]],None]
         ydl_opts['postprocessors'] = [{
                 'key': 'FFmpegExtractAudio',
                 'preferredcodec': 'mp3',
-                'preferredquality': '192',
+                #'preferredquality': '192',
+                'preferredquality': '64',
         }]
         #ydl_opts['format'] = 'bestaudio/best'
         ydl_opts['format'] = 'mp3/bestaudio/best'
